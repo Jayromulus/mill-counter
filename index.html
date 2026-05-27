@@ -8,17 +8,15 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <title>Mill Tracker</title>
 </head>
 <body>
   <section class="top">
-    <div id="deck"><img alt="deck-bg" src="assets/card-back.jpg" /><div class="center"><p id="deck-count" class="audio-regular">53</p></div></div>
+    <div id="deck"><p>Deck: <span id="deck-count" class="audio-regular">53</span></p></div>
     <!-- <div id="hand"><img alt="deck-bg" src="assets/card-back.jpg" /><div class="center"><p class="audio-regular">7</p></div></div> -->
-    <div id="discard"><img alt="deck-bg" src="assets/card-back.jpg" /><div class="center"><p id="discard-count" class="audio-regular">0</p></div></div>
+    <div id="discard"><p>Discard: <span id="discard-count" class="audio-regular">0</span></p></div>
+    <div id="reset"><button id="reset-game">Reset</button></div>
   </section>
   <!-- <section class="top">
     <div id="current_count">24</div>
@@ -28,7 +26,7 @@
   </section> -->
 
   <section class="buttons">
-    <div id="custom">Custom Input</div>
+    <div id="custom"><img alt="millstone" src="./assets/millstone.jpg" /></div>
     <div id="jace-perfected-mind"><img alt="Jace, Perfected Mind" src="./assets/jace-perfected-mind.jpg" /></div>
     <div id="thought-scour"><img alt="Thought Scour" src="./assets/thought-scour.jpg" /></div>
     <div id="exhibition-tidecaller"><img alt="Exhibition Tidecaller" src="./assets/exhibition-tidecaller.jpg" /></div>
