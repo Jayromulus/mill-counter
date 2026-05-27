@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(34, 29, 64);
+  color: rgb(111, 212, 222);
+  /* color: white; */
+  overflow-x: hidden;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.space-grotesk-400 {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.top {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+#deck, #hand, #discard {
+  position: relative;
+  text-align: center;
+}
+
+#deck img, #hand img, #discard img {
+  width: 40%;
+  margin: 9% 0;
+  border-radius: 5px;
+  filter: grayscale(90%);
+}
+
+#discard img {
+  rotate: 90deg;
+}
+#deck .center, #hand .center, #discard .center {
+  color: rgb(180, 244, 255);
+  /* -webkit-text-stroke: 1px rgb(0, 0, 0); */
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.buttons div {
+  width: 50%;
+}
+
+.buttons div img {
+  width: 98%;
+  border-radius: 15px;
+}
