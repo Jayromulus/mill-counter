@@ -6,13 +6,13 @@
   <!-- <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
   <link rel="manifest" href="./assets/favicon/site.webmanifest"> -->
   <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content= "width=device-width, user-scalable=no">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-  <meta name="viewport" content= "width=device-width, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+PhagsPa&display=swap" rel="stylesheet">
   <title>Mill Tracker</title>
 </head>
-<body>
+<body class="google-sans-500">
   <section class="top">
     <div id="deck"><p>Deck: <span id="deck-count" class="audio-regular">53</span></p></div>
     <!-- <div id="hand"><img alt="deck-bg" src="assets/card-back.jpg" /><div class="center"><p class="audio-regular">7</p></div></div> -->
@@ -27,17 +27,47 @@
   </section> -->
 
   <section class="buttons">
+    <div id="draw"><img alt="draw" src="./assets/aesthetic-consultation.jpg" /></div>
+    <div id="discard-card"><img alt="discard" src="./assets/into-the-pit.jpg" /></div>
+    <div id="card-on-top"><img alt="card-on-top" src="./assets/the-deck-of-many-things.jpg" /></div>
+    <p class="spacer"></p>
     <div id="custom"><img alt="millstone" src="./assets/millstone.jpg" /></div>
     <div id="jace-perfected-mind"><img alt="Jace, Perfected Mind" src="./assets/jace-perfected-mind.jpg" /></div>
-    <div id="thought-scour"><img alt="Thought Scour" src="./assets/thought-scour.jpg" /></div>
-    <div id="exhibition-tidecaller"><img alt="Exhibition Tidecaller" src="./assets/exhibition-tidecaller.jpg" /></div>
-    <div id="drowned-secrets"><img alt="Drowned Secrets" src="./assets/drowned-secrets.jpg" /></div>
-    <div id="archive-trap"><img alt="Archive Trap" src="./assets/archive-trap.jpg" /></div>
-    <div id="sorcerous-squall"><img alt="Sorcerous Squall" src="./assets/sorcerous-squall.jpg" /></div>
-    <div id="stream-of-thought"><img alt="Stream of Thought" src="./assets/stream-of-thought.jpg" /></div>
     <div id="surgical-extraction"><img alt="Surgical Extraction" src="./assets/surgical-extraction.jpg" /></div>
+    <div id="thought-scour"><img alt="Thought Scour" src="./assets/thought-scour.jpg" /></div>
+    <div id="drowned-secrets"><img alt="Drowned Secrets" src="./assets/drowned-secrets.jpg" /></div>
+    <div></div>
     <div id="ruin-crab"><img alt="Ruin Crab" src="./assets/ruin-crab.jpg" /></div>
+    <div id="exhibition-tidecaller"><img alt="Exhibition Tidecaller" src="./assets/exhibition-tidecaller.jpg" /></div>
+    <div></div>
+    <div id="stream-of-thought"><img alt="Stream of Thought" src="./assets/stream-of-thought.jpg" /></div>
+    <div></div>
+    <div></div>
+    <div id="sorcerous-squall"><img alt="Sorcerous Squall" src="./assets/sorcerous-squall.jpg" /></div>
+    <div></div>
+    <div></div>
+    <div id="archive-trap"><img alt="Archive Trap" src="./assets/archive-trap.jpg" /></div>
+    <div></div>
+    <div></div>
   </section>
+
+  <div id="custom-input" class="buttons hidden">
+    <!-- <input type="number" id="amount"> -->
+    <div id="one">1</div>
+    <div id="two">2</div>
+    <div id="three">3</div>
+    <div id="four">4</div>
+    <div id="five">5</div>
+    <div id="six">6</div>
+    <div id="seven">7</div>
+    <div id="eight">8</div>
+    <div id="nine">9</div>
+    <div id="modifier">+</div>
+    <div id="zero">0</div>
+    <div id="backspace">back</div>
+    <div id="current">123</div>
+    <div id="submit">done</div>
+  </div>
 
   <script src="./main.js"></script>
 </body>

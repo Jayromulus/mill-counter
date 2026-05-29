@@ -8,23 +8,25 @@ body {
   background-color: rgb(34, 29, 64);
   color: rgb(111, 212, 222);
   /* color: white; */
-  overflow-x: hidden;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  overflow: hidden;
+  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
 }
 
-.space-grotesk-400 {
-  font-family: "Space Grotesk", sans-serif;
+
+.google-sans-500 {
+  font-family: "Google Sans", sans-serif;
   font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "GRAD" 0;
+}
+
+.noto-sans-phagspa-regular {
+  font-family: "Noto Sans PhagsPa", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
-
-.audiowide-regular {
-  font-family: "Audiowide", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
 
 .top {
   display: flex;
@@ -75,7 +77,12 @@ body {
 }
 
 .buttons div {
-  width: 50%;
+  width: 33%;
+}
+
+.spacer {
+  margin: 2% 0;
+  width: 100%;
 }
 
 .buttons div img {
@@ -85,4 +92,28 @@ body {
 
 .buttons div img.blurred {
   filter:blur(90%);
+}
+
+#custom-input {
+  position: absolute;
+  height: 92%;
+  margin-top: 18%;
+  width: 100%;
+  background-color: rgb(34, 29, 64);
+  top: 0;
+  left: 0;
+}
+
+#custom-input div {
+  text-align: center;
+  font-size: 2rem;
+  padding: 10% 0 0 0;
+}
+
+#submit, #current {
+  width: 50%;
+}
+
+.hidden {
+  visibility: hidden;
 }
