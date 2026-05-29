@@ -1,5 +1,5 @@
 html, body {
-    touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 body {
@@ -7,9 +7,7 @@ body {
   padding: 0;
   background-color: rgb(34, 29, 64);
   color: rgb(111, 212, 222);
-  /* color: white; */
   overflow: hidden;
-  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
 }
 
 
@@ -53,7 +51,6 @@ body {
 }
 #deck .center, #hand .center, #discard .center {
   color: rgb(180, 244, 255);
-  /* -webkit-text-stroke: 1px rgb(0, 0, 0); */
   font-size: 3rem;
   position: absolute;
   top: 50%;
