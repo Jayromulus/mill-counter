@@ -74,6 +74,10 @@ body {
   width: 33%;
 }
 
+#draw, #card-on-top, #discard-card, #remove-discard {
+  width: 25%;
+}
+
 .spacer {
   margin: 0 0 1% 0;
   width: 98%;

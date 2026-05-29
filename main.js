@@ -9,12 +9,13 @@ const squall = document.getElementById('sorcerous-squall');
 const stream = document.getElementById('stream-of-thought');
 const surgical = document.getElementById('surgical-extraction');
 const crab = document.getElementById('ruin-crab');
-const draw = document.getElementById('draw');
 const discardCard = document.getElementById('discard-card');
 const cardOnTop = document.getElementById('card-on-top');
 
+const draw = document.getElementById('draw');
 const deck = document.getElementById('deck-count');
 const discard = document.getElementById('discard-count');
+const undiscard = document.getElementById('remove-discard');
 
 const reset = document.getElementById('reset');
 
@@ -125,7 +126,10 @@ function toggleModifier() {
 
 // Split strings added to game logs to allow for number highlighting in the same color as the close button
 function submitCustom() {
+  if (currentModifier === 'add') runningTotal.unshift('-');
   let millAmount = parseInt(runningTotal.join(''));
+
+  console.log(millAmount);
 
   if (runningTotal.length > 0) mill(millAmount, false);
   switch (currentCustom) {
@@ -187,8 +191,9 @@ surgical.addEventListener('click', e => togglePopup(true, 'Surgical Extraction')
 
 // update draw, discard, and cards on top to be a popup with an input
 draw.addEventListener('click', e => deckManip(1, true, false, 'draw'));
-discardCard.addEventListener('click', e => deckManip(1, false, true, 'discard'));
 cardOnTop.addEventListener('click', e => deckManip(-1, true, false, 'top'));
+discardCard.addEventListener('click', e => deckManip(1, false, true, 'discard'));
+undiscard.addEventListener('click', e => deckManip(-1, false, true, 'undiscard'));
 passTurn.addEventListener('click', e => deckManip(1, true, false, 'pass'));
 
 thought.addEventListener('click', e => mill(2, 'Thought Collapse'));
