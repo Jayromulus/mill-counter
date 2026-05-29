@@ -4,6 +4,7 @@ const thought = document.getElementById('thought-scour');
 const tidecaller = document.getElementById('exhibition-tidecaller');
 const secrets = document.getElementById('drowned-secrets');
 const archive = document.getElementById('archive-trap');
+const ravenous = document.getElementById('ravenous-trap');
 const squall = document.getElementById('sorcerous-squall');
 const stream = document.getElementById('stream-of-thought');
 const surgical = document.getElementById('surgical-extraction');
@@ -60,7 +61,7 @@ renderLogs();
 
 function renderLogs() {
   historyDump.innerHTML = '';
-  gameLogs.forEach(log => {
+  gameLogs.forEach((log, count) => {
     console.log(`rendering: ${log}`);
     const text = document.createElement('p');
     text.innerText = log;
@@ -85,6 +86,14 @@ function mill(amount, source) {
   discardSize += amount;
 
   if (source && amount) gameLogs.push(`${source} milled the opponent ${amount} cards.`)
+
+  renderPage();
+}
+
+function ravenousTrap() {
+  discardSize = 0;
+
+  gameLogs.push('Ravenous Trap exiled opponent\'s graveyard.');
 
   renderPage();
 }
@@ -114,6 +123,7 @@ function toggleModifier() {
   renderPage();
 }
 
+// Split strings added to game logs to allow for number highlighting in the same color as the close button
 function submitCustom() {
   let millAmount = parseInt(runningTotal.join(''));
 
@@ -143,9 +153,9 @@ function deckManip(amount, deck, discard, source) {
 
     deckSize -= 1;
 
-    gameLogs.push('--------------------------------------------------------');
+    gameLogs.push('----------------------------------------------------');
     gameLogs.push('Passed Turn');
-    gameLogs.push('--------------------------------------------------------');
+    gameLogs.push('----------------------------------------------------');
 
   }
 
@@ -205,6 +215,7 @@ backspace.addEventListener('click', e => removeNumber());
 
 reset.addEventListener('click', e => resetGame());
 submit.addEventListener('click', e => submitCustom());
+ravenous.addEventListener('click', e => ravenousTrap());
 
 logs.addEventListener('click', e => toggleLogs(true));
 closeLogs.addEventListener('click', e => toggleLogs(false));
