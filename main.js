@@ -15,7 +15,7 @@ const cardOnTop = document.getElementById('card-on-top');
 const deck = document.getElementById('deck-count');
 const discard = document.getElementById('discard-count');
 
-const reset = document.getElementById('reset-game');
+const reset = document.getElementById('reset');
 
 const customPopup = document.getElementById('custom-input');
 
