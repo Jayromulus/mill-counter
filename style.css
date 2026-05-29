@@ -49,6 +49,7 @@ body {
 #discard img {
   rotate: 90deg;
 }
+
 #deck .center, #hand .center, #discard .center {
   color: rgb(180, 244, 255);
   font-size: 3rem;
@@ -80,27 +81,37 @@ body {
 
 .buttons div img {
   width: 98%;
-  border-radius: 15px;
-}
-
-.buttons div img.blurred {
-  filter:blur(90%);
+  border-radius: 5px;
 }
 
 #custom-input {
   position: absolute;
   height: 92%;
-  margin-top: 18%;
+  margin-top: 16%;
   width: 100%;
   background-color: rgb(34, 29, 64);
   top: 0;
   left: 0;
 }
+#game-history {
+  position: absolute;
+  height: 92%;
+  margin-top: 16%;
+  width: 90%;
+  background-color: rgb(34, 29, 64);
+  top: 0;
+  left: 0;
+}
+#pass-turn {
+  text-align: center;
+  margin: auto;
+  font-size: 3rem;
+}
 
 #custom-input div {
   text-align: center;
   font-size: 2rem;
-  padding: 10% 0 0 0;
+  padding: 15% 0 0 0;
 }
 
 #submit, #current {
@@ -109,4 +120,20 @@ body {
 
 .hidden {
   visibility: hidden;
+}
+
+#game-history {
+  padding: 0 5%;
+  overflow-y: scroll;
+}
+
+#close-history {
+  position: fixed;
+  top: 10;
+  right: 20px;
+  color: rgb(216, 156, 255);
+  background-color: rgb(34, 29, 64);
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid rgb(119, 106, 192);
 }

@@ -34,11 +34,19 @@ const backspace = document.getElementById('backspace');
 const current = document.getElementById('current');
 const submit = document.getElementById('submit');
 
-const pageElements = [custom, jace, thought, tidecaller, secrets, archive, squall, stream, surgical, crab];
+const logs = document.getElementById('logs');
+const passTurn = document.getElementById('pass-turn');
+
+const historyWindow = document.getElementById('game-history');
+const historyDump = document.getElementById('dump');
+const closeLogs = document.getElementById('close-history');
 
 let deckSize = 53;
 let discardSize = 0;
 let runningTotal = [];
+let gameLogs = [];
+// let gameLogs = ['Jace, Perfected Mind milled the opponent 15 cards', 'Opponent milled 1 card', '--------------------------------------------------------', 'Passed Turn', '--------------------------------------------------------', 'Opponent drew 1 card from their deck', 'Exhibition Tidecaller milled the opponent 3 cards', 'Exhibition Tidecaller milled the opponent 3 cards', 'Stream of Thought milled the opponent 4 cards', 'Jace, Perfected Mind milled the opponent 15 cards', 'Opponent milled 1 card', 'Passed Turn', 'Opponent drew 1 card from their deck', 'Exhibition Tidecaller milled the opponent 3 cards', 'Exhibition Tidecaller milled the opponent 3 cards', 'Stream of Thought milled the opponent 4 cards', 'Jace, Perfected Mind milled the opponent 15 cards', 'Opponent milled 1 card', 'Passed Turn', 'Opponent drew 1 card from their deck', 'Exhibition Tidecaller milled the opponent 3 cards', 'Exhibition Tidecaller milled the opponent 3 cards', 'Stream of Thought milled the opponent 4 cards', 'Jace, Perfected Mind milled the opponent 15 cards', 'Opponent milled 1 card', 'Passed Turn', 'Opponent drew 1 card from their deck', 'Exhibition Tidecaller milled the opponent 3 cards', 'Exhibition Tidecaller milled the opponent 3 cards', 'Stream of Thought milled the opponent 4 cards', 'Jace, Perfected Mind milled the opponent 15 cards', 'Opponent milled 1 card', 'Passed Turn', 'Opponent drew 1 card from their deck', 'Exhibition Tidecaller milled the opponent 3 cards', 'Exhibition Tidecaller milled the opponent 3 cards', 'Stream of Thought milled the opponent 4 cards'];
+let currentCustom = '';
 let currentModifier = 'subtract';
 
 function renderPage() {
@@ -48,22 +56,44 @@ function renderPage() {
   modifier.innerText = currentModifier === 'add' ? '+' : '-';
 }
 
-function mill(amount) {
-  deckSize -= amount;
-  discardSize += amount;
+renderLogs();
 
-  renderPage();
+function renderLogs() {
+  historyDump.innerHTML = '';
+  gameLogs.forEach(log => {
+    console.log(`rendering: ${log}`);
+    const text = document.createElement('p');
+    text.innerText = log;
+    if (log === 'Passed Turn') text.style.textAlign = 'center';
+    historyDump.appendChild(text);
+  });
 }
 
 function resetGame() {
   deckSize = 53;
   discardSize = 0;
+  currentCustom = '';
+  currentModifier = 'subtract';
+  while (runningTotal.length > 0) runningTotal.pop();
+  while (gameLogs.length > 0) gameLogs.pop();
 
   renderPage();
 }
 
-function togglePopup(open) {
+function mill(amount, source) {
+  deckSize -= amount;
+  discardSize += amount;
+
+  if (source && amount) gameLogs.push(`${source} milled the opponent ${amount} cards.`)
+
+  renderPage();
+}
+
+function togglePopup(open, char) {
   open ? customPopup.classList.remove('hidden') : customPopup.classList.add('hidden');
+  currentCustom = char;
+
+  if (!open) currentModifier = 'subtract';
 }
 
 function addNumber(num) {
@@ -85,35 +115,79 @@ function toggleModifier() {
 }
 
 function submitCustom() {
-  if (runningTotal.length > 0) mill(parseInt(runningTotal.join('')));
+  let millAmount = parseInt(runningTotal.join(''));
+
+  if (runningTotal.length > 0) mill(millAmount, false);
+  switch (currentCustom) {
+    case 'Jace, Perfected Mind':
+      if (millAmount) gameLogs.push(`${currentCustom} milled the opponent ${millAmount} cards.`);
+      break;
+    case 'Surgical Extraction':
+      if (millAmount) gameLogs.push(`${currentCustom} removed ${millAmount} cards from the opponent's deck.`);
+      break;
+    default:
+      if (millAmount) gameLogs.push(`Opponent milled ${millAmount} cards.`);
+      break;
+  }
+
   togglePopup(false);
   while (runningTotal.length > 0) runningTotal.pop();
-  renderPage();
-}
-
-function deckManip(amount, deck, discard) {
-  if (deck) deckSize -= amount;
-  if (discard) discardSize += amount;
 
   renderPage();
 }
 
-custom.addEventListener('click', e => togglePopup(true));
-jace.addEventListener('click', e => togglePopup(true));
-surgical.addEventListener('click', e => togglePopup(true));
+function deckManip(amount, deck, discard, source) {
+  if (source === 'pass') {
+    deck = false;
+    discard = false;
 
-draw.addEventListener('click', e => deckManip(1, true, false))
-discardCard.addEventListener('click', e => deckManip(1, false, true))
-cardOnTop.addEventListener('click', e => deckManip(-1, true, false))
+    deckSize -= 1;
 
-thought.addEventListener('click', e => mill(2));
-tidecaller.addEventListener('click', e => mill(3));
-secrets.addEventListener('click', e => mill(2));
-archive.addEventListener('click', e => mill(13));
-squall.addEventListener('click', e => mill(9));
-stream.addEventListener('click', e => mill(4));
-crab.addEventListener('click', e => mill(3));
+    gameLogs.push('--------------------------------------------------------');
+    gameLogs.push('Passed Turn');
+    gameLogs.push('--------------------------------------------------------');
 
+  }
+
+  if (deck) {
+    deckSize -= amount;
+    if (amount) gameLogs.push(`Opponent ${amount > 0 ? 'drew' : 'returned'} ${Math.abs(amount)} ${amount > 1 || amount < -1 ? 'cards' : 'card'} ${amount > 0 ? 'from' : 'to'} their deck.`);
+  }
+  
+  if (discard) {
+    discardSize += amount;
+    if (amount) gameLogs.push(`Opponent ${amount > 0 ? 'discarded' : 'removed'} ${Math.abs(amount)} ${amount > 1 || amount < -1 ? 'cards' : 'card'} ${amount > 0 ? 'from' : 'to'} their ${amount > 0 ? 'hand' : 'discard'}.`);
+  }
+
+  renderPage();
+}
+
+function toggleLogs(open) {
+  if (open) {
+    renderLogs();
+    historyWindow.classList.remove('hidden');
+  } else {
+    historyWindow.classList.add('hidden');
+  }
+}
+
+custom.addEventListener('click', e => togglePopup(true, 'custom'));
+jace.addEventListener('click', e => togglePopup(true, 'Jace, Perfected Mind'));
+surgical.addEventListener('click', e => togglePopup(true, 'Surgical Extraction'));
+
+// update draw, discard, and cards on top to be a popup with an input
+draw.addEventListener('click', e => deckManip(1, true, false, 'draw'));
+discardCard.addEventListener('click', e => deckManip(1, false, true, 'discard'));
+cardOnTop.addEventListener('click', e => deckManip(-1, true, false, 'top'));
+passTurn.addEventListener('click', e => deckManip(1, true, false, 'pass'));
+
+thought.addEventListener('click', e => mill(2, 'Thought Collapse'));
+tidecaller.addEventListener('click', e => mill(3, 'Exhibition Tidecaller'));
+secrets.addEventListener('click', e => mill(2, 'Drowned Secrets'));
+archive.addEventListener('click', e => mill(13, 'Archive Trap'));
+squall.addEventListener('click', e => mill(9, 'Sorcerous Squall'));
+stream.addEventListener('click', e => mill(4, 'Stream of Thought'));
+crab.addEventListener('click', e => mill(3, 'Ruin Crab'));
 
 one.addEventListener('click', e => addNumber(1));
 two.addEventListener('click', e => addNumber(2));
@@ -129,6 +203,8 @@ zero.addEventListener('click', e => addNumber(0));
 modifier.addEventListener('click', e => toggleModifier());
 backspace.addEventListener('click', e => removeNumber());
 
-pageElements.forEach(el => el.classList.add('blurred'));
 reset.addEventListener('click', e => resetGame());
 submit.addEventListener('click', e => submitCustom());
+
+logs.addEventListener('click', e => toggleLogs(true));
+closeLogs.addEventListener('click', e => toggleLogs(false));
